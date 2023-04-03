@@ -8,5 +8,16 @@
 
 {% block content %}
   <h1>Welcome to the To-Do list!</h1>
+  <br>
+  <p>currently you have {{ task_count}} taks</p>
+  <ul>
+    
+    {% for task in tasks %}
+      <li>
+        {{ task }}
+      </li>
+    {% endfor %}
+      
+  </ul>
 {% endblock content %}
   
