@@ -39,6 +39,10 @@
               {% endfor %}
             </ul>
           </p>
+          <p>
+            [ <a href="{% url 'todolist:task-update' pk=task.id %}">Update</a> ]
+            [ <a href="{% url 'todolist:task-delete' pk=task.id %}">Delete</a> ]
+          </p>
         </td>
       </tr>
     {% endfor %}
