@@ -2,16 +2,16 @@
 
 
 {% block title %}
-  Add new tag
+  New task
 {% endblock title %}
 
 
-
 {% block content %}
-  <h2>{{ object|yesno:"Update,Create" }} Tag</h2>
+  <h2>{{ object|yesno:"Update,Create new" }} Task</h2>
   <form action="" method="post" novalidate>
     {% csrf_token %}
-    {{ form }}
+    {{ form.media }}
+    {{ form.as_p }}
     <input type="submit" value="Submit">
   </form>
 {% endblock content %}

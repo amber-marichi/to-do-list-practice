@@ -4,10 +4,11 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from todolist.models import Tag, Task
+from todolist.forms import TaskForm
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.all().order_by("is_done")
+    tasks = Task.objects.prefetch_related("tags").order_by("is_done")
     task_count = Task.objects.count()
 
     context = {
@@ -37,3 +38,9 @@ class TagUpdateView(generic.UpdateView):
 class TagDeleteView(generic.DeleteView):
     model = Tag
     success_url = reverse_lazy("todolist:tag-list")
+
+
+class TaskCreateView(generic.CreateView):
+    model = Task
+    form_class = TaskForm
+    success_url = reverse_lazy("todolist:index")

@@ -10,6 +10,9 @@
   <h1>TODO list!</h1>
   <br>
   <p>currently you have {{ task_count}} taks</p>
+  <a href="{% url 'todolist:task-create' %}">
+    <input type="button" value="Add task">
+  </a>
   <ul>
     
     {% for task in tasks %}
@@ -20,4 +23,3 @@
       
   </ul>
 {% endblock content %}
-  
