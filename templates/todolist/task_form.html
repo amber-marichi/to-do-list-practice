@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+  {{ object|yesno:"Update,Create new" }} Task
+{% endblock title %}
+
+
+{% block content %}
+  <h2>{{ object|yesno:"Update,Create new" }} Task</h2>
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form|crispy }}
+    <p>no proper tag? <a href="{% url 'todolist:tag-create' %}">add new one</a></p>
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+{% endblock content %}

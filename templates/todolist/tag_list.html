@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  Tag list
+{% endblock title %}
+
+
+{% block content %}
+  <h2>All Tags
+    <a href="{% url 'todolist:tag-create' %}">
+      <input type="button" value="Add new" class="btn btn-primary link-to-page">
+    </a>
+  </h2>
+  <br>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    {% for tag in tag_list %}
+      <tr>
+        <td>{{ tag }}</td>
+        <td>
+          <a href="{% url 'todolist:tag-update' pk=tag.id %}">
+            <input type="button" value="Update" class="btn btn-secondary">
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'todolist:tag-delete' pk=tag.id %}">
+            <input type="button" value="Delete" class="btn btn-danger">
+          </a>
+        </td>
+      </tr>  
+    {% endfor %}
+  </table>
+{% endblock content %}
