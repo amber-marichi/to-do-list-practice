@@ -9,6 +9,7 @@ from todolist.views import (
     TaskCreateView,
     TaskDeleteView,
     TaskUpdateView,
+    toggle_complete_task,
 )
 
 
@@ -48,6 +49,11 @@ urlpatterns = [
         "tasks/<int:pk>/delete/",
         TaskDeleteView.as_view(),
         name="task-delete"
+    ),
+    path(
+        "taks/<int:pk>/complete/",
+        toggle_complete_task,
+        name="task-complete"
     ),
 ]
 

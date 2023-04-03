@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -8,7 +8,7 @@ from todolist.forms import TaskForm
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.prefetch_related("tags").order_by("is_done")
+    tasks = Task.objects.prefetch_related("tags").order_by("is_done", "-datetime")
     task_count = Task.objects.count()
 
     context = {
@@ -55,3 +55,10 @@ class TaskUpdateView(generic.UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy("todolist:index")
+
+
+def toggle_complete_task(request: HttpRequest, pk: int) -> HttpResponseRedirect:
+    task = Task.objects.get(id=pk)
+    task.is_done = not task.is_done
+    task.save()
+    return HttpResponseRedirect(reverse_lazy("todolist:index"))

@@ -24,8 +24,15 @@
         [ <a href="{% url 'todolist:task-delete' pk=task.id %}">
           Delete
         </a> ]
+        
+        <a href="{% url 'todolist:task-complete' pk=task.id%}">
+            {% if task.is_done %}
+              <input type="button" value="Undo">
+            {% else %}
+              <input type="button" value="Complete">
+            {% endif %}
+        </a>
       </li>
     {% endfor %}
-      
   </ul>
 {% endblock content %}
