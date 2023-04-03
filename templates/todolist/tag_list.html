@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  Tag list
+{% endblock title %}
+
+
+
+{% block content %}
+  <ul>
+    {% for tag in tag_list %}
+      <li>{{ tag }}</li>
+    {% endfor %}
+
+  </ul>
+    
+{% endblock content %}
+  
