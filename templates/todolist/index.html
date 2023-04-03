@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 
 {% block title %}
@@ -7,32 +7,40 @@
 
 
 {% block content %}
-  <h1>TODO list!</h1>
+  <h1>TODO list
+    <a href="{% url 'todolist:task-create' %}">
+      <input type="button" value="Add task"  class="btn btn-primary link-to-page">
+    </a>
+  </h1>
   <br>
-  <p>currently you have {{ task_count}} taks</p>
-  <a href="{% url 'todolist:task-create' %}">
-    <input type="button" value="Add task">
-  </a>
-  <ul>
-    
+  <table class="table">
     {% for task in tasks %}
-      <li>
-        {{ task }}
-        [ <a href="{% url 'todolist:task-update' pk=task.id %}">
-          Update
-        </a> ]
-        [ <a href="{% url 'todolist:task-delete' pk=task.id %}">
-          Delete
-        </a> ]
-        
-        <a href="{% url 'todolist:task-complete' pk=task.id%}">
-            {% if task.is_done %}
-              <input type="button" value="Undo">
-            {% else %}
-              <input type="button" value="Complete">
+      <tr>
+        <td>
+          <h3><strong>{{ task.content }}</strong>
+            <a href="{% url 'todolist:task-complete' pk=task.id%}">
+              {% if task.is_done %}
+                <input type="button" value="Undo" class="btn btn-danger link-to-page">
+              {% else %}
+                <input type="button" value="Complete" class="btn btn-secondary link-to-page">
+              {% endif %}
+          </a>
+          </h3>
+          <p><strong>Created:</strong> {{ task.datetime }}
+            {% if task.deadline %}
+              <strong>Deadline:</strong> {{ task.deadline }}
             {% endif %}
-        </a>
-      </li>
+          </p>
+          <p>
+            <ul class="list-inline">
+              <li class="list-inline-item"><strong>Tags:</strong></li>
+              {% for tag in task.tags.all %}
+                <li class="list-inline-item">{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          </p>
+        </td>
+      </tr>
     {% endfor %}
-  </ul>
+  </table>
 {% endblock content %}
