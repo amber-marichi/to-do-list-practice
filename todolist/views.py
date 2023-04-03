@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse_lazy
@@ -54,7 +53,10 @@ class TaskUpdateView(generic.UpdateView):
     success_url = reverse_lazy("todolist:index")
 
 
-def toggle_complete_task(request: HttpRequest, pk: int) -> HttpResponseRedirect:
+def toggle_complete_task(
+    request: HttpRequest,
+    pk: int
+) -> HttpResponseRedirect:
     task = Task.objects.get(id=pk)
     task.is_done = not task.is_done
     task.save()
