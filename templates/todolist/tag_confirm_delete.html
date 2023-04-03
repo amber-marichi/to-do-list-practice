@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  Delete tag {{ tag }}
+{% endblock title %}
+
+
+
+{% block content %}
+  <h2>Delete tag {{ tag }} ?</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    <a href="{% url 'todolist:tag-list' %}"><input type="button" value="No, back"></a>
+    <input type="submit" value="Yes, delete">
+  </form>
+{% endblock content %}

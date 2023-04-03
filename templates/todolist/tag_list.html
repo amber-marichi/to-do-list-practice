@@ -9,9 +9,9 @@
 
 {% block content %}
   <h2>All Tags</h2>
-  [ <a href="{% url 'todolist:tag-create' %}">
-    add new
-  </a> ]
+  <a href="{% url 'todolist:tag-create' %}">
+    <input type="button" value="Add new">
+  </a>
   <table>
     <tr>
       <th>Name</th>
@@ -21,8 +21,16 @@
     {% for tag in tag_list %}
       <tr>
         <td>{{ tag }}</td>
-        <td><a href="">Update</a></td>
-        <td><a href="">Delete</a></td>
+        <td>
+          <a href="{% url 'todolist:tag-update' pk=tag.id %}">
+            <input type="button" value="Update">
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'todolist:tag-delete' pk=tag.id %}">
+            <input type="button" value="Delete">
+          </a>
+        </td>
       </tr>  
     {% endfor %}
   </table>
