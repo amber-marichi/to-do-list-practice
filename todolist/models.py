@@ -15,8 +15,7 @@ class Task(models.Model):
     is_done = models.BooleanField()
     tags = models.ManyToManyField(
         to=Tag,
-        null=True,
-        on_delete=models.SET_NULL,
+        blank=True,
         related_name="tasks"
     )
 
