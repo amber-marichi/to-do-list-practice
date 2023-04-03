@@ -8,10 +8,25 @@
 
 
 {% block content %}
-  <ul>
+  <h2>All Tags</h2>
+  [ <a href="{% url 'todolist:tag-create' %}">
+    add new
+  </a> ]
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
     {% for tag in tag_list %}
-      <li>{{ tag }}</li>
+      <tr>
+        <td>{{ tag }}</td>
+        <td><a href="">Update</a></td>
+        <td><a href="">Delete</a></td>
+      </tr>  
     {% endfor %}
+  </table>
+  <ul>
 
   </ul>
     
