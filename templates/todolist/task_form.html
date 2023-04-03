@@ -2,7 +2,7 @@
 
 
 {% block title %}
-  New task
+  {{ object|yesno:"Update,Create new" }} Task
 {% endblock title %}
 
 

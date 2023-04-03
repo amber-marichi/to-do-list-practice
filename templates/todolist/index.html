@@ -18,6 +18,12 @@
     {% for task in tasks %}
       <li>
         {{ task }}
+        [ <a href="{% url 'todolist:task-update' pk=task.id %}">
+          Update
+        </a> ]
+        [ <a href="{% url 'todolist:task-delete' pk=task.id %}">
+          Delete
+        </a> ]
       </li>
     {% endfor %}
       
