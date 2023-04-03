@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -7,20 +7,17 @@ from todolist.models import Tag, Task
 from todolist.forms import TaskForm
 
 
-def index(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.prefetch_related("tags").order_by("is_done", "-datetime")
-    task_count = Task.objects.count()
-
-    context = {
-        "task_count": task_count,
-        "tasks": tasks,
-    }
-
-    return render(request, "todolist/index.html", context)
+class TaskListView(generic.ListView):
+    model = Task
+    queryset = Task.objects.prefetch_related("tags").order_by("is_done", "-datetime")
+    context_object_name = "tasks"
+    template_name = "todolist/index.html"
+    paginate_by = 5
 
 
 class TagListView(generic.ListView):
     model = Tag
+    paginate_by = 10
 
 
 class TagCreateView(generic.CreateView):

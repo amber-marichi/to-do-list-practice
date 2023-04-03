@@ -1,7 +1,7 @@
 from django.urls import path
 
 from todolist.views import (
-    index,
+    TaskListView,
     TagListView,
     TagCreateView,
     TagUpdateView,
@@ -14,7 +14,7 @@ from todolist.views import (
 
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", TaskListView.as_view(), name="index"),
     path(
         "tags/",
         TagListView.as_view(),
